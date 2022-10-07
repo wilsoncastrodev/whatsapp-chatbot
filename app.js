@@ -3,6 +3,7 @@ import wppconnect from "@wppconnect-team/wppconnect";
 import { welcome } from './components/welcome.js';
 import { mainMenu } from './components/menus/mainMenu.js';
 import { aboutMe } from "./components/aboutMe.js";
+import { professionalProfile } from "./components/professionalProfile.js";
 
 wppconnect
 	.create({
@@ -23,6 +24,8 @@ const start = (client) => {
 	client.onMessage(async (message) => {
 			if (message.body == '👦🏻 Sobre Mim') {
 				global.context[message.from] = "Sobre Mim";
+			} else if (message.body == '👨🏻‍💻 Perfil Profissional') {
+				global.context[message.from] = "Perfil Profissional";
 			} else {
 				const sheet = doc.sheetsByIndex[0],
 					rows = await sheet.getRows(),
@@ -41,6 +44,10 @@ const start = (client) => {
 
 			if (global.context[message.from] == 'Sobre Mim') {
 				await aboutMe(message, client);
+			}
+
+			if (global.context[message.from] == 'Perfil Profissional') {
+				await professionalProfile(message, client);
 			}
 
 			if (global.context[message.from] == 'Menu Principal') {

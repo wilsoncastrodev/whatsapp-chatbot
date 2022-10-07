@@ -1,5 +1,6 @@
 import { firstWordName } from "../../utils/helpers.js";
 import { doc } from '../../libs/google-spreadsheet.js';
+import { mainMenuBoot } from "../menus/mainMenuBoot.js";
 import sleep from "es7-sleep";
 import validator from "validator";
 
@@ -98,6 +99,7 @@ export const formJobOpportunity = async (message, client) => {
             await rows[rowIndex].save();
 
             recruiterStages[message.from] = '';
+            await mainMenuBoot(message, client);
             break;
     }
 }

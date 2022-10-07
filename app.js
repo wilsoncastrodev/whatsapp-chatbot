@@ -1,6 +1,7 @@
 import wppconnect from "@wppconnect-team/wppconnect";
 
 import { welcome } from './components/welcome.js';
+import { mainMenu } from './components/menus/mainMenu.js';
 
 wppconnect
 	.create({
@@ -19,10 +20,22 @@ global.context = [];
 
 const start = (client) => {
 	client.onMessage(async (message) => {
-		global.context[message.from] = "Inicial";
+			const sheet = doc.sheetsByIndex[0],
+				rows = await sheet.getRows(),
+				isUserRegister = rows.some(row => row.ID === message.from);
 
-		if (global.context[message.from] == 'Inicial') {
-			await welcome(message, client);
-		}
+			if (!isUserRegister) {
+				global.context[message.from] = "Inicial";
+			} else if (global.context[message.from] === undefined) {
+				global.context[message.from] = "Menu Principal";
+			}
+
+			if (global.context[message.from] == 'Inicial') {
+				await welcome(message, client);
+			}
+
+			if (global.context[message.from] == 'Menu Principal') {
+				await mainMenu(message, client);
+			}
 	});
 }

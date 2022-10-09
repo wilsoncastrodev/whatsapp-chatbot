@@ -5,6 +5,7 @@ import { mainMenu } from './components/menus/mainMenu.js';
 import { aboutMe } from "./components/aboutMe.js";
 import { professionalProfile } from "./components/professionalProfile.js";
 import { academyTrajectory } from "./components/academyTrajectory.js";
+import { professionalTrajectory } from "./components/professionalTrajectory.js";
 
 wppconnect
 	.create({
@@ -29,6 +30,8 @@ const start = (client) => {
 				global.context[message.from] = "Perfil Profissional";
 			} else if (message.body == '🏫 Formação Acadêmica') {
 				global.context[message.from] = "Formação Acadêmica";
+			} else if (message.body == '🏢 Experiência Profissional') {
+				global.context[message.from] = "Experiência Profissional";
 			} else {
 				const sheet = doc.sheetsByIndex[0],
 					rows = await sheet.getRows(),
@@ -55,6 +58,10 @@ const start = (client) => {
 
 			if (global.context[message.from] == 'Formação Acadêmica') {
 				await academyTrajectory(message, client);
+			}
+
+			if (global.context[message.from] == 'Experiência Profissional') {
+				await professionalTrajectory(message, client);
 			}
 
 			if (global.context[message.from] == 'Menu Principal') {

@@ -8,6 +8,7 @@ import { academyTrajectory } from "./components/academyTrajectory.js";
 import { professionalTrajectory } from "./components/professionalTrajectory.js";
 import { personalProjects } from "./components/personalProjects.js";
 import { skills } from "./components/skills.js";
+import { scheduleInterview } from "./components/scheduleInterview.js";
 
 wppconnect
 	.create({
@@ -36,8 +37,8 @@ const start = (client) => {
 				global.context[message.from] = "Experiência Profissional";
 			} else if (message.body == '💻 Projetos Pessoais') {
 				global.context[message.from] = "Projetos Pessoais";
-			} else if (message.body == '📚 Habilidades') {
-				global.context[message.from] = "Habilidades";
+			} else if (message.body == '📆 Agendar Entrevista' || message.body == '❌ Cancelar Entrevista') {
+				global.context[message.from] = "Agendar Entrevista";
 			} else {
 				const sheet = doc.sheetsByIndex[0],
 					rows = await sheet.getRows(),
@@ -76,6 +77,10 @@ const start = (client) => {
 			
 			if (global.context[message.from] == 'Habilidades') {
 				await skills(message, client);
+			}
+			
+			if (global.context[message.from] == 'Agendar Entrevista') {
+				await scheduleInterview(message, client);
 			}
 
 			if (global.context[message.from] == 'Menu Principal') {

@@ -1,4 +1,12 @@
+import { doc } from '../../libs/google-spreadsheet.js';
+
 export const menu = async (message, client) => {
+    const sheet = doc.sheetsByIndex[0];
+
+    const rows = await sheet.getRows();
+    const rowIndex = rows.findIndex(row => row.ID === message.from);
+    const interview = rows[rowIndex]['Nome do Entrevistador'];
+
     const description = `*Menu Principal*
   
   👦🏻 Sobre Mim
@@ -10,7 +18,7 @@ export const menu = async (message, client) => {
   🛣️ Calcular a Distância
   💬 Perguntas e Respostas
   📄 Visualizar Currículo
-  📆 Agendar Entrevista
+  ${!interview ? '📆 Agendar Entrevista' : '❌ Cancelar Entrevista'}
   📲 Falar Diretamente Comigo
   👋🏻 Encerrar Conversa`;
 
@@ -49,7 +57,7 @@ export const menu = async (message, client) => {
                         title: '📄 Visualizar Currículo',
                     },
                     {
-                        title: '📆 Agendar Entrevista',
+                        title: !interview ? '📆 Agendar Entrevista' : '❌ Cancelar Entrevista',
                     },
                     {
                         title: '📲 Falar Diretamente Comigo',

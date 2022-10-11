@@ -9,6 +9,7 @@ import { professionalTrajectory } from "./components/professionalTrajectory.js";
 import { personalProjects } from "./components/personalProjects.js";
 import { skills } from "./components/skills.js";
 import { scheduleInterview } from "./components/scheduleInterview.js";
+import { calculateDistance } from "./components/calculateDistance.js";
 
 wppconnect
 	.create({
@@ -39,6 +40,8 @@ const start = (client) => {
 				global.context[message.from] = "Projetos Pessoais";
 			} else if (message.body == '📆 Agendar Entrevista' || message.body == '❌ Cancelar Entrevista') {
 				global.context[message.from] = "Agendar Entrevista";
+			} else if (message.body == '🛣️ Calcular a Distância') {
+				global.context[message.from] = "Calcular a Distância";
 			} else {
 				const sheet = doc.sheetsByIndex[0],
 					rows = await sheet.getRows(),
@@ -81,6 +84,10 @@ const start = (client) => {
 			
 			if (global.context[message.from] == 'Agendar Entrevista') {
 				await scheduleInterview(message, client);
+			}
+
+			if (global.context[message.from] == 'Calcular a Distância') {
+				await calculateDistance(message, client);
 			}
 
 			if (global.context[message.from] == 'Menu Principal') {

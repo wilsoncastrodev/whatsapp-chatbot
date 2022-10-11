@@ -13,6 +13,7 @@ import { calculateDistance } from "./components/calculateDistance.js";
 import { questionsAnswers } from "./components/questionsAnswers.js";
 import { cv } from "./components/cv.js";
 import { speakDirectly } from "./components/speakDirectly.js";
+import { endConversation } from "./components/endConversation.js";
 
 wppconnect
 	.create({
@@ -51,6 +52,8 @@ const start = (client) => {
 				global.context[message.from] = "Visualizar Currículo";
 			} else if (message.body == '📲 Falar Diretamente Comigo') {
 				global.context[message.from] = "Falar Diretamente Comigo";
+			} else if (message.body == '👋🏻 Encerrar Conversa' || message.body == 'Encerrar Conversa') {
+				global.context[message.from] = "Encerrar Conversa";
 			} else {
 				const sheet = doc.sheetsByIndex[0],
 					rows = await sheet.getRows(),
@@ -109,6 +112,10 @@ const start = (client) => {
 
 			if (global.context[message.from] == 'Falar Diretamente Comigo') {
 				await speakDirectly(message, client);
+			}
+			
+			if (global.context[message.from] == 'Encerrar Conversa') {
+				await endConversation(message, client);
 			}
 
 			if (global.context[message.from] == 'Menu Principal') {

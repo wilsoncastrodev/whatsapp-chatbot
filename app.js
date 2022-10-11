@@ -12,6 +12,7 @@ import { scheduleInterview } from "./components/scheduleInterview.js";
 import { calculateDistance } from "./components/calculateDistance.js";
 import { questionsAnswers } from "./components/questionsAnswers.js";
 import { cv } from "./components/cv.js";
+import { speakDirectly } from "./components/speakDirectly.js";
 
 wppconnect
 	.create({
@@ -48,6 +49,8 @@ const start = (client) => {
 				global.context[message.from] = "Perguntas e Respostas";
 			} else if (message.body == '📄 Visualizar Currículo') {
 				global.context[message.from] = "Visualizar Currículo";
+			} else if (message.body == '📲 Falar Diretamente Comigo') {
+				global.context[message.from] = "Falar Diretamente Comigo";
 			} else {
 				const sheet = doc.sheetsByIndex[0],
 					rows = await sheet.getRows(),
@@ -102,6 +105,10 @@ const start = (client) => {
 			
 			if (global.context[message.from] == 'Visualizar Currículo') {
 				await cv(message, client);
+			}
+
+			if (global.context[message.from] == 'Falar Diretamente Comigo') {
+				await speakDirectly(message, client);
 			}
 
 			if (global.context[message.from] == 'Menu Principal') {

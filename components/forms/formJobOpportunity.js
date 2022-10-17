@@ -3,6 +3,7 @@ import { doc } from '../../libs/google-spreadsheet.js';
 import { mainMenuBoot } from "../menus/mainMenuBoot.js";
 import sleep from "es7-sleep";
 import validator from "validator";
+import nodemailer from "nodemailer";
 
 var recruiterStages = [];
 var recruiter = {};
@@ -72,15 +73,18 @@ export const formJobOpportunity = async (message, client) => {
         case 'SiteCV':
             if(validator.isNumeric(message.body)) {
                 client.sendText(message.from, "Para finalizar " + firstWordName(message.notifyName) + ", *onde encontrou o meu currículo* (ex.: Catho, Infojobs, Vagas.com)?");
-                recruiterStages[message.from] = 'Fim';
+                recruiterStages[message.from] = 'CodigoVerificacao';
                 recruiter.salario = message.body;
                 break;
             } 
             client.sendText(message.from, "😥 *Que pena, não entendi.* Digite novamente o *salário* utilizando *apenas números* e *sem vírgula*:");
             recruiterStages[message.from] = 'SiteCV';
             break;
-        case 'Fim':
+        case 'CodigoVerificacao':
+            client.sendText(message.from, "Para *confirmar sua identidade*, um *código de verificação* será enviado para seu endereço de *e-mail*.");
             recruiter.siteCV = message.body;
+            let code = Math.floor(Math.random() * (999 - 1) + 1);
+            recruiter.codigoVerificacao = String(code).padStart(3, '0');
 
             const rows = await sheet.getRows();
             const rowIndex = rows.findIndex(row => row.ID === message.from);
@@ -95,11 +99,49 @@ export const formJobOpportunity = async (message, client) => {
             rows[rowIndex]["Forma de Contratação"] = recruiter.formaContratacao;
             rows[rowIndex]["Salário"] = recruiter.salario;
             rows[rowIndex]["Site"] = recruiter.siteCV;
+            rows[rowIndex]["Código de Verificação"] = recruiter.codigoVerificacao;
 
             await rows[rowIndex].save();
 
-            recruiterStages[message.from] = '';
-            await mainMenuBoot(message, client);
+            let transporter = nodemailer.createTransport({ 
+                service: 'gmail', 
+                auth: { 
+                   user: 'wcastropaixao@gmail.com', 
+                   pass: 'hjhgawisuyfgpzhu' 
+                 } 
+            });
+            
+            const mailOptions = {
+                from: 'Wilson Castro da Paixão <contato@wilsoncastro.dev>',
+                to: recruiter.email,
+                subject: 'Código de Verificação do Assistente Virtual do Whatsapp (Wilson Castro)',
+                html: 'Olá ' + recruiter.nome + '!' +
+                      '<br><br>Por favor, utilize o código <mark style="background: #f5f5f5;padding: 7px;border-radius: 8px;font-weight: bolder;letter-spacing: 1.1px;">' + recruiter.codigoVerificacao + 
+                      '</mark> no assistente virtual do Whatsapp para concluir a verificação de identidade.' +
+                      '<br><br>Atenciosamente,<br><strong>Wilson Castro</strong>.'
+            };
+            await sleep(3000);
+            client.sendText(message.from, "Pronto! Foi enviado um *código de verificação* para o endereço de *e-mail* que você informou. ");
+            await sleep(500);
+            client.sendText(message.from, "Por favor, informe o *código* para continuar:");
+            
+            transporter.sendMail(mailOptions);
+
+            recruiterStages[message.from] = 'Fim';
             break;
+        case 'Fim':
+            if(recruiter.codigoVerificacao === message.body) {
+                await mainMenuBoot(message, client);
+                recruiterStages[message.from] = '';
+                break;
+            } 
+        
+        client.sendText(message.from, "😥 *Que pena, código inválido.*");
+        await sleep(500);
+        client.sendText(message.from, "_Caso não tenha recebido o código por e-mail ou tenha algum outro problema, entre em contato com o *Wilson* pelo e-mail contato@wilsoncastro.dev_");
+        await sleep(500);
+        client.sendText(message.from, "Caso você tenha recebido, verifique o *código* e tente digitar novamente:");
+        recruiterStages[message.from] = 'Fim';
+        break;
     }
 }

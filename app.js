@@ -87,6 +87,8 @@ const start = (client) => {
 				global.context[message.from] = "Projetos Pessoais";
 			} else if (message.body == '📆 Agendar Entrevista' || message.body == '❌ Cancelar Entrevista') {
 				global.context[message.from] = "Agendar Entrevista";
+			} else if (message.body == '📚 Habilidades') {
+				global.context[message.from] = "Habilidades";
 			} else if (message.body == '🛣️ Calcular a Distância') {
 				global.context[message.from] = "Calcular a Distância";
 			} else if (message.body == '💬 Perguntas e Respostas') {

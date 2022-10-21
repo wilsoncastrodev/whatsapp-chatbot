@@ -17,7 +17,6 @@ export const menu = async (message, client) => {
   💻 Projetos Pessoais
   💬 Perguntas e Respostas
   📄 Visualizar Currículo
-  🛣️ Calcular a Distância
   ${!interview ? '📆 Agendar Entrevista' : '❌ Cancelar Entrevista'}
   📲 Falar Diretamente Comigo
   👋🏻 Encerrar Conversa`;
@@ -53,9 +52,9 @@ export const menu = async (message, client) => {
                     {
                         title: '📄 Visualizar Currículo',
                     },
-                    {
+                    /* {
                         title: '🛣️ Calcular a Distância',
-                    },
+                    }, */
                     {
                         title: !interview ? '📆 Agendar Entrevista' : '❌ Cancelar Entrevista',
                     },

@@ -204,7 +204,7 @@ export const formInterviewVideo = async (message, client) => {
                 rows[rowIndex]["Informação da Entrevista"] = interviewVideo.infoEntrevista;
 
                 await rows[rowIndex].save();
-                interviewVideo = '';
+                interviewVideo = {};
             }
 
             if (message.body === 'Refazer Agendamento') {

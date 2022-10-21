@@ -12,6 +12,8 @@ export const formInterviewCall = async (message, client) => {
     const sheet = doc.sheetsByIndex[0];
     let dates = await getCallVideoDates();
 
+    console.log(interviewCall);
+
     if (message.body === 'Entrevista por Chamada') {
         interviewCallStages[message.from] = 'Nome';
         interviewCall.tipoEntrevista = 'Por chamada';
@@ -143,7 +145,7 @@ export const formInterviewCall = async (message, client) => {
                 rows[rowIndex]["Período da Entrevista"] = interviewCall.periodoEntrevista;
 
                 await rows[rowIndex].save();
-                interviewCall = '';
+                interviewCall = {};
             }
 
             if (message.body === 'Refazer Agendamento') {

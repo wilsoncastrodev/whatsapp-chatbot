@@ -159,7 +159,7 @@ export const formInterviewPresential = async (message, client) => {
                 rows[rowIndex]["Informação da Entrevista"] = interviewPresential.infoEntrevista;
 
                 await rows[rowIndex].save();
-                interviewPresential = '';
+                interviewPresential = {};
             }
 
             if (message.body === 'Refazer Agendamento') {

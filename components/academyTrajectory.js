@@ -21,12 +21,18 @@ _Superior Completo_
     client.sendText(message.from, `Veja abaixo 👇 o meu *Trabalho de Conclusão de Curso* (TCC) realizado na Faculdade de Tecnologia de São Caetano do Sul, onde desenvolvi ao lado de outros companheiros de equipe:`);
     await sleep(1500);
     client.sendText(message.from, '*TCC - Campark System: Sistema de controle de acesso ao estacionamento por meio de câmeras*');
-    await client.sendFile(
-        message.from,
-        'https://wilsoncastro.dev/tcc/tcc-campark-system-sistema-de-controle-de-acesso-ao-estacionamento-por-meio-de-cameras.pdf',
-        'TCC - Wilson Castro da Paixão',
-        'TCC - Wilson Castro da Paixão'
-    );
+
+    try {
+        await client.sendFile(
+            message.from,
+            'https://wilsoncastro.dev/tcc/tcc-campark-system-sistema-de-controle-de-acesso-ao-estacionamento-por-meio-de-cameras.pdf',
+            'TCC - Wilson Castro da Paixão',
+            'TCC - Wilson Castro da Paixão'
+        );
+    } catch (e) {
+        client.sendText(message.from, '_Ocorreu um problema no carregamento do arquivo. Por favor, volte a tentar mais tarde._');
+    }
+
     await sleep(1500);
     client.sendText(message.from, `Toque no botão abaixo 👇 para ver as *disciplinas cursadas* durante o curso:`,
         {

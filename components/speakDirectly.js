@@ -1,5 +1,5 @@
 import { doc } from '../libs/google-spreadsheet.js';
-import { firstWordName } from "../utils/helpers.js";
+import { firstWordName, disableBot } from "../utils/helpers.js";
 
 export const speakDirectly = async (message, client) => {
     const sheet = doc.sheetsByIndex[0];
@@ -22,6 +22,10 @@ export const speakDirectly = async (message, client) => {
 
         client.sendText(message.from, '_' + firstWordName(message.notifyName) + ', por favor, peço que você aguarde que *em breve estarei retornando* o seu contato._');
     } else {
-        global.context[message.from] = "Menu Principal";
+        const isEnable = await disableBot(message);
+        
+        if (isEnable !== 'Ativado') {
+            global.context[message.from] = "Menu Principal";
+        }
     }
 }

@@ -19,7 +19,7 @@ export const formCalculateDistance = async (message, client) => {
         case 'CEP':
             client.sendText(message.from, "Por aqui, você consegue *calcular* a *distância* da minha *casa* até a *empresa* e o *tempo de viagem* que eu levaria utilizando *transporte público*.");
             await sleep(1000);
-            client.sendText(message.from, "Para a realização do cálculo, por favor, me diga qual é o *CEP da empresa*. ");
+            client.sendText(message.from, "Para a realização do cálculo, por favor, me diga qual é o *CEP da empresa*? ");
             distanceStages[message.from] = 'Endereco';
             break;
         case 'Endereco':
@@ -43,7 +43,7 @@ export const formCalculateDistance = async (message, client) => {
                     return false;
                 }
 
-                client.sendText(message.from, "Agora, por favor, me diga qual é o *número onde está localizada a empresa*.");
+                client.sendText(message.from, "Agora, por favor, me diga qual é o *número onde está localizada a empresa*?");
                 distanceStages[message.from] = 'NumeroEmpresa';
             }
 
@@ -73,8 +73,6 @@ export const formCalculateDistance = async (message, client) => {
 
 
                 getRoute(address).then(async result => {
-
-                console.log(result.data.routes[0].legs[0]);
 
                     let legs = result.data.routes[0].legs[0],
                         route = {},
@@ -142,7 +140,7 @@ ${lineName.slice(0, -1)}`;
             }
 
             if (message.body === 'Alterar o Endereço') {
-                client.sendText(message.from, "Por favor, me diga qual é o *CEP da empresa*: ");
+                client.sendText(message.from, "Por favor, me diga qual é o *CEP da empresa*? ");
                 distanceStages[message.from] = 'Endereco';
             }
 

@@ -15,7 +15,6 @@ export const mainMenu = async (message, client) => {
     interview.dataEntrevista = rows[rowIndex]['Data da Entrevista'];
     interview.horarioEntrevista = rows[rowIndex]['Horário da Entrevista'];
 
-
     if (message.body === 'Voltar ao Menu Principal') {
         if(interview.horarioEntrevista) {    
             let dateInterview = moment(interview.dataEntrevista, 'DD/MM/YYYY').format("DD [de] MMMM"),

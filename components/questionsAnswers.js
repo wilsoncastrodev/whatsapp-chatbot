@@ -3,6 +3,7 @@ import sleep from "es7-sleep";
 export const questionsAnswers = async (message, client) => {
     if (message.body === '💬 Perguntas e Respostas') {
         client.sendText(message.from, `Veja abaixo 👇 algumas *perguntas e respostas* sobre mim:`);
+        await sleep(500);
         client.sendText(message.from, `*Entre CLT e PJ, qual você prefere?*
 Após eu ter feito uma análise dos modelos de trabalho CLT e PJ, percebi que o modelo CLT se enquadra melhor ao meu perfil profissional. Devido a isso, eu tenho preferência em trabalhar como CLT, mas estou aberto à propostas do tipo PJ.`);
         await sleep(500);

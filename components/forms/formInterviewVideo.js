@@ -135,7 +135,7 @@ export const formInterviewVideo = async (message, client) => {
             }
 
             if (message.body === 'Não') {
-                client.sendText(message.from, 'Por favor ' + firstWordName(message.notifyName) + ', me diga quando será *enviado o link*.');
+                client.sendText(message.from, 'Por favor ' + firstWordName(message.notifyName) + ', me diga quando será *enviado o link*?');
                 interviewVideoStages[message.from] = 'InformacaoAdicional';
             }
 

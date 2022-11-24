@@ -130,3 +130,12 @@ export const getPeriod = (time) => {
     else
         return "Tarde";
 }
+
+export const disableBot = async (message) => {
+	const sheet = doc.sheetsByIndex[0];
+
+	const rows = await sheet.getRows();
+	const rowIndex = rows.findIndex(row => row.ID === message.from);
+
+	return rowIndex >= 0 ? rows[rowIndex]['Contato Direto'] : false;
+}

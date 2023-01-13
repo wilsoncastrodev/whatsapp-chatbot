@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  app:
+    container_name: "whatsapp-chatbot"
+    build: .
+    restart: always
+    working_dir: /app
+    volumes:
+      - .:/app
+    stdin_open: true
+    tty: true
+    ports:
+      - "3000:3000"
+
+
+# Lista de comandos para executar dentro do container do docker
+# docker exec -it whatsapp-chatbot bash
+# rm -rf node_modules
+# npm install
+# npm start

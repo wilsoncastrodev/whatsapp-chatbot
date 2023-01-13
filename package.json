@@ -1,0 +1,16 @@
+{
+  "name": "whatsapp-chatbot",
+  "version": "2.0.0",
+  "description": "O projeto visa o desenvolvimento de um assistente virtual para Whatsapp com objetivo de facilitar e agilizar o meu primeiro contato com o recrutador/headhunter.",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Wilson Castro da Paixão",
+  "license": "ISC",
+  "dependencies": {
+    "@wppconnect-team/wppconnect": "^1.20.0",
+    "sharp": "^0.31.3"
+  }
+}

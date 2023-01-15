@@ -1,4 +1,5 @@
 import RecruiterService from "../../services/recruiter.service.js";
+import { mainMenuBoot } from "../menus/mainMenuBoot.component.js";
 import { firstWordName, generateCode } from "../../utils/commons.js";
 import sleep from "es7-sleep";
 import validator from "validator";
@@ -93,6 +94,7 @@ const formJobOpportunity = async (message, client) => {
             break;
         case 'Fim':
             if(recruiter.codigoVerificacao === message.body) {
+                await mainMenuBoot(message, client);
                 global.recruiterStages[message.from] = '';
                 break;
             } 

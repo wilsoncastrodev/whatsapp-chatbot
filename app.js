@@ -1,5 +1,6 @@
 import wppconnect from "@wppconnect-team/wppconnect";
 import { executablePath } from 'puppeteer';
+import contexts from "./contexts/global.context.js"
 
 wppconnect
 	.create({
@@ -10,15 +11,6 @@ wppconnect
 	})
 	.then((client) => {
 		console.log("Conexão Estabelecida!");
-		start(client);
+		contexts(client);
 	})
 	.catch((error) => console.log(error));
-
-
-const start = (client) => {
-    client.onMessage(async (message) => {
-        if (message.body == 'Teste') {
-            client.sendText(message.from, 'Olá Teste!');
-        }
-    })
-}

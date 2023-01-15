@@ -41,8 +41,23 @@ const updateRecruiter = async (message, recruiter) => {
     transporter.sendMail(mailOptions);
 }
 
+const createAuthRecruiter = async (message) => {
+    const rows = await sheet.getRows();
+    const rowIndex = rows.findIndex(row => row.ID === message.from);
+
+    rows[rowIndex]["Autenticado"] = "SIM";
+    await rows[rowIndex].save();
+}
+
+const verifyAuthRecruiter = async (message) => {
+    const rows = await sheet.getRows();
+    return rows.some(row => row.ID === message.from && row.Autenticado === 'SIM');
+}
+
 export default {
     createRecruiter,
     verifyRecruiter,
-    updateRecruiter
+    updateRecruiter,
+    createAuthRecruiter,
+    verifyAuthRecruiter
 }

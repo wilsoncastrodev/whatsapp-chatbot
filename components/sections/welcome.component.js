@@ -7,7 +7,7 @@ const welcome = async (message, client) => {
     const recruiterAccepted = await RecruiterService.verifyRecruiter(message);
 
     let order = 1;
-    
+
     if (message.body !== "Aceito" && message.body !== "Não Aceito") {
         if (!recruiterAccepted) {
             if(order == 1) {
@@ -15,7 +15,7 @@ const welcome = async (message, client) => {
                 order++;
                 await sleep(3000);
             }
-            
+
             if(order == 2) {
                 client.sendText(message.from, '_Eu e ele somos praticamente um só. Conversando com ele é como se você estivesse conversando comigo. Então, sinta-se a vontade para conversar com ele. 😊_');
                 order++;
@@ -37,7 +37,7 @@ const welcome = async (message, client) => {
             if(order == 5) {
                 client.sendText(message.from, `🔒 Conheça a minha *Política de Privacidade* em: www.wilsoncastro.dev/#politica-privacidade-whatsapp
 
-        Ao tocar no botão "Aceito" abaixo 👇, você concorda com a minha *Política de Privacidade*.`, {
+Ao tocar no botão "Aceito" abaixo 👇, você concorda com a minha *Política de Privacidade*.`, {
                     useTemplateButtons: true,
                     buttons: [{ text: 'Aceito' }, { text: 'Não Aceito' }]
                 });

@@ -8,13 +8,14 @@ global.recruiterStages = [];
 global.recruiter = {};
 
 const formJobOpportunity = async (message, client) => {
+    const recruiter = global.recruiter;
+
     if (message.body === 'Aceito') {
         await RecruiterService.createRecruiter(message);
         global.recruiterStages[message.from] = 'Nome';
     }
-    
+
     const stage = global.recruiterStages[message.from];
-    const recruiter = global.recruiter;
 
     switch (stage) {
         case 'Nome':
@@ -95,6 +96,7 @@ const formJobOpportunity = async (message, client) => {
         case 'Fim':
             if(recruiter.codigoVerificacao === message.body) {
                 await mainMenuBoot(message, client);
+                await RecruiterService.createAuthRecruiter(message);
                 global.recruiterStages[message.from] = '';
                 break;
             } 

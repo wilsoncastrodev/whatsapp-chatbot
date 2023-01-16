@@ -33,6 +33,9 @@ const contexts = (client) => {
             case '📄 Visualizar Currículo':
                 global.context[message.from] = 'Visualizar Currículo';
                 break;
+            case '📆 Agendar Entrevista':
+                global.context[message.from] = 'Agendar Entrevista';
+                break;
             case '👋🏻 Encerrar Conversa':
             case 'Encerrar Conversa':
                 global.context[message.from] = 'Encerrar Conversa';

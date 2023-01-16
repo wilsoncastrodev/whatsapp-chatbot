@@ -1,10 +1,17 @@
 import RecruiterService from "../services/recruiter.service.js";
+import BotService from "../services/bot.service.js";
 import menuContext from "./menu.context.js";
 
 global.context = [];
 
 const contexts = (client) => {
     client.onMessage(async (message) => {
+        const isActiveBot = await BotService.disableDirectContact(message);
+
+        if (isActiveBot === 'Ativado') {
+            return;
+        }
+
         const option = message.body;
 
 
@@ -38,6 +45,9 @@ const contexts = (client) => {
                 break;
             case '❌ Cancelar Entrevista':
                 global.context[message.from] = 'Cancelar Entrevista';
+                break;
+            case '📲 Falar Diretamente Comigo':
+                global.context[message.from] = 'Falar Diretamente Comigo';
                 break;
             case '👋🏻 Encerrar Conversa':
             case 'Encerrar Conversa':

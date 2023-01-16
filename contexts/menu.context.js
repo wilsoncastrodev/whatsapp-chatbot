@@ -9,6 +9,7 @@ import questionsAnswers from "../components/sections/questionsAnswers.component.
 import cv from "../components/sections/cv.component.js";
 import scheduleInterview from "../components/sections/scheduleInterview.component.js";
 import cancelInterview from "../components/sections/cancelInterview.component.js";
+import speakDirectly from "../components/sections/speakDirectly.component.js";
 import endConversation from '../components/sections/endConversation.component.js';
 import mainMenu from '../components/menus/mainMenu.component.js';
 
@@ -46,6 +47,9 @@ const menuContexts = async (context, message, client) => {
             break;
         case 'Cancelar Entrevista':
             await cancelInterview(message, client);
+            break;
+        case 'Falar Diretamente Comigo':
+            await speakDirectly(message, client);
             break;
         case 'Encerrar Conversa':
             await endConversation(message, client);

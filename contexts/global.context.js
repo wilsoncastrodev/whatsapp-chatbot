@@ -30,6 +30,9 @@ const contexts = (client) => {
             case '💬 Perguntas e Respostas':
                 global.context[message.from] = 'Perguntas e Respostas';
                 break;
+            case '📄 Visualizar Currículo':
+                global.context[message.from] = 'Visualizar Currículo';
+                break;
             case '👋🏻 Encerrar Conversa':
             case 'Encerrar Conversa':
                 global.context[message.from] = 'Encerrar Conversa';

@@ -18,6 +18,9 @@ const contexts = (client) => {
             case '🏫 Formação Acadêmica':
                 global.context[message.from] = 'Formação Acadêmica';
                 break;
+            case '🏢 Experiência Profissional':
+                global.context[message.from] = 'Experiência Profissional';
+                break;
             case '👋🏻 Encerrar Conversa':
             case 'Encerrar Conversa':
                 global.context[message.from] = 'Encerrar Conversa';

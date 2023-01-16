@@ -5,6 +5,7 @@ import academyTrajectory from "../components/sections/academyTrajectory.componen
 import professionalTrajectory from "../components/sections/professionalTrajectory.component.js";
 import skills from "../components/sections/skills.component.js";
 import personalProjects from "../components/sections/personalProjects.component.js";
+import questionsAnswers from "../components/sections/questionsAnswers.component.js";
 import endConversation from '../components/sections/endConversation.component.js';
 import mainMenu from '../components/menus/mainMenu.component.js';
 
@@ -27,6 +28,9 @@ const menuContexts = async (context, message, client) => {
             break;
         case 'Habilidades':
             await skills(message, client);
+            break;
+        case 'Perguntas e Respostas':
+            await questionsAnswers(message, client);
             break;
         case 'Projetos Pessoais':
             await personalProjects(message, client);

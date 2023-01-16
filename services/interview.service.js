@@ -44,8 +44,33 @@ const createInterviewVideo = async (message, interviewVideo) => {
     await rows[rowIndex].save();
 }
 
+const getInterviewerName = async (message) => {
+    const rows = await sheet.getRows();
+    const rowIndex = rows.findIndex(row => row.ID === message.from);
+    return rows[rowIndex]['Nome do Entrevistador'];
+}
+
+const cancelInterview = async (message) => {
+    const rows = await sheet.getRows();
+    const rowIndex = rows.findIndex(row => row.ID === message.from);
+
+    rows[rowIndex]["Nome do Entrevistador"] = '';
+    rows[rowIndex]["Tipo da Entrevista"] = '';
+    rows[rowIndex]["Data da Entrevista"] = '';
+    rows[rowIndex]["Horário da Entrevista"] = '';
+    rows[rowIndex]["Período da Entrevista"] = '';
+    rows[rowIndex]["Plataforma da Entrevista"] = '';
+    rows[rowIndex]["Link da Entrevista"] = '';
+    rows[rowIndex]["Informação da Entrevista"] = '';
+    rows[rowIndex]["Endereço da Entrevista"] = '';
+
+    await rows[rowIndex].save();
+}
+
 export default {
     createInterviewCall,
     createInterviewPresential,
-    createInterviewVideo
+    createInterviewVideo,
+    getInterviewerName,
+    cancelInterview
 }

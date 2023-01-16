@@ -36,6 +36,9 @@ const contexts = (client) => {
             case '📆 Agendar Entrevista':
                 global.context[message.from] = 'Agendar Entrevista';
                 break;
+            case '❌ Cancelar Entrevista':
+                global.context[message.from] = 'Cancelar Entrevista';
+                break;
             case '👋🏻 Encerrar Conversa':
             case 'Encerrar Conversa':
                 global.context[message.from] = 'Encerrar Conversa';

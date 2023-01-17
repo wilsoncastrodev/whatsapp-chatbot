@@ -1,4 +1,4 @@
-import { sheet } from '../libs/google-spreadsheet.lib.js';
+import { sheet } from '../libs/googleSpreadsheet.lib.js';
 import moment from 'moment';
 import pkg from 'rrule';
 const { RRule } = pkg;

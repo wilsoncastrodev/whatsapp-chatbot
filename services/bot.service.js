@@ -1,4 +1,4 @@
-import { sheet } from '../libs/google-spreadsheet.lib.js';
+import { sheet } from '../libs/googleSpreadsheet.lib.js';
 
 const activateDirectContact = async (message) => {
     const rows = await sheet.getRows();

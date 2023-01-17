@@ -1,4 +1,4 @@
-import { sheet } from '../libs/google-spreadsheet.lib.js';
+import { sheet } from '../libs/googleSpreadsheet.lib.js';
 import { transporter } from '../libs/nodemailer.lib.js';
 
 const createRecruiter = async (message) => {

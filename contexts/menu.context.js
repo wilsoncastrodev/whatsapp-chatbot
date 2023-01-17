@@ -7,6 +7,7 @@ import skills from "../components/sections/skills.component.js";
 import personalProjects from "../components/sections/personalProjects.component.js";
 import questionsAnswers from "../components/sections/questionsAnswers.component.js";
 import cv from "../components/sections/cv.component.js";
+import calculateDistance from "../components/sections/calculateDistance.component.js";
 import scheduleInterview from "../components/sections/scheduleInterview.component.js";
 import cancelInterview from "../components/sections/cancelInterview.component.js";
 import speakDirectly from "../components/sections/speakDirectly.component.js";
@@ -41,6 +42,9 @@ const menuContexts = async (context, message, client) => {
             break;
         case 'Visualizar Currículo':
             await cv(message, client);
+            break;
+        case 'Calcular a Distância':
+            await calculateDistance(message, client);
             break;
         case 'Agendar Entrevista':
             await scheduleInterview(message, client);

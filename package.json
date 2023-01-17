@@ -10,7 +10,9 @@
   "author": "Wilson Castro da Paixão",
   "license": "ISC",
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.3.26",
     "@wppconnect-team/wppconnect": "^1.20.0",
+    "cep-promise": "^4.3.0",
     "dotenv": "^16.0.3",
     "es7-sleep": "^1.0.0",
     "google-spreadsheet": "^3.3.0",

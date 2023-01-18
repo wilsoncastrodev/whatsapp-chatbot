@@ -7,13 +7,17 @@ global.context = [];
 const contexts = (client) => {
     client.onMessage(async (message) => {
         const isActiveBot = await BotService.disableDirectContact(message);
+        const option = message.body;
 
         if (isActiveBot === 'Ativado') {
             return;
         }
 
-        const option = message.body;
-
+        if (option != '👋🏻 Encerrar Conversa') {
+            await BotService.inactiveBot(client, message);
+        } else {
+            clearTimeout(global.time[message.from]);
+        }
 
         switch (option) {
             case '👦🏻 Sobre Mim':

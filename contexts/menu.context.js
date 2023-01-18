@@ -62,6 +62,8 @@ const menuContexts = async (context, message, client) => {
             await mainMenu(message, client);
             break;
     }
+
+    console.log('Contexto: ', context);
 };
 
 
